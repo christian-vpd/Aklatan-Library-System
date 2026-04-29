@@ -7,6 +7,7 @@ use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Patrons;
 
 class User extends Authenticatable
 {
@@ -22,6 +23,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'status',
+        'role',
     ];
 
     /**
@@ -46,4 +49,18 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function patron() {
+        return $this->hasOne(Patron::class, 'user_id');
+    }
+        
+    public function patronTypeAdded() {
+        return $this->hasMany(PatronType::class, 'added_by');
+    }
+
+    public function librarian() {
+        return $this->hasOne(Librarian::class, 'user_id');
+    }
+    
 }
+            
