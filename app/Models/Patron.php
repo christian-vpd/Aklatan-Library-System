@@ -18,6 +18,6 @@ class Patron extends Model
     }
 
     public function type() {
-        return $this->belongsTo(PatronType::class, 'patron_type', 'id');
+        return $this->belongsTo(PatronType::class, 'patron_type_id', 'id');
     }
 }

@@ -61,6 +61,10 @@ class User extends Authenticatable
     public function librarian() {
         return $this->hasOne(Librarian::class, 'user_id');
     }
+
+    public function books() {
+        return $this->hasMany(Book::class, 'created_by');
+    }
     
 }
             

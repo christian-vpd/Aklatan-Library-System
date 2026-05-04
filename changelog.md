@@ -1,7 +1,10 @@
 # Changelogs
 
+**v0.0.2 - May 4, 2026**
+- Add and Update Seeders and Migrations
+
 **v0.0.1 - April 29, 2026**
-- Instaled Laravel Breeze
+- Installed Laravel Breeze
 - Add and Update Seeders and Migrations
 - Initiate Auth Controllers
 

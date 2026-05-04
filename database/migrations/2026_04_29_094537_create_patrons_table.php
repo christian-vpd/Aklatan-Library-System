@@ -22,8 +22,8 @@ return new class extends Migration
             $table->string('suffix')->nullable(true);
             $table->string('profile_picture')->nullable(true);
             $table->enum('gender', ['Male','Female']);
-            $table->unsignedBigInteger('patron_type');
-            $table->foreign('patron_type')->references('id')->on('patron_types')->onDelete('restrict')->onUpdate('cascade');
+            $table->unsignedBigInteger('patron_type_id');
+            $table->foreign('patron_type_id')->references('id')->on('patron_types')->onDelete('restrict')->onUpdate('cascade');
             $table->string('contact_number');
             $table->softDeletes();
             $table->timestamps();

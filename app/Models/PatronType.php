@@ -14,7 +14,7 @@ class PatronType extends Model
     protected $guarded = [];
 
     public function patrons() {
-        return $this->hasMany(Patron::class, 'patron_type');
+        return $this->hasMany(Patron::class, 'patron_type_id');
     }
 
     public function addedBy() {
