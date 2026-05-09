@@ -66,7 +66,7 @@ class PatronSeeder extends Seeder
                 'last_name' => 'Doe',
                 'first_name' => 'Jane',
                 'patron_type_id' => 1,
-                'gender' => 'Male',
+                'gender' => 'Female',
                 'contact_number' => '09123456789',
             ],
             [

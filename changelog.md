@@ -1,5 +1,8 @@
 # Changelogs
 
+**v0.0.3 - May 9, 2026**
+- Add and Update Seeders and Migrations
+
 **v0.0.2 - May 4, 2026**
 - Add and Update Seeders and Migrations
 

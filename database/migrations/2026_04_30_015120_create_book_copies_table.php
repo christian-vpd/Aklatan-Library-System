@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreign('book_id')->references('id')->on('books')->onDelete('restrict')->onUpdate('cascade');
             $table->string('ascension_number')->unique();
             $table->string('barcode')->nullable()->unique();
-            $table->enum('status', ['avaliable', 'borrowed', 'reserved', 'lost', 'damaged'])->default('available');
+            $table->enum('status', ['available', 'borrowed', 'reserved', 'lost', 'damaged'])->default('available');
             $table->enum('condition', ['new', 'good', 'fair', 'poor'])->default('good');
             $table->softDeletes();
             $table->timestamps();

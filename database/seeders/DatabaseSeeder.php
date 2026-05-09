@@ -26,6 +26,11 @@ class DatabaseSeeder extends Seeder
             PatronTypeSeeder::class,
             PatronSeeder::class,
             LibrarianSeeder::class,
+            CategorySeeder::class,
+            AuthorSeeder::class,
+            BookSeeder::class,
+            BookAuthorSeeder::class,
+            BookCopiesSeeder::class,
         ]);
     }
 }
