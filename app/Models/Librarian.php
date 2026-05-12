@@ -16,4 +16,8 @@ class Librarian extends Model
     public function user() {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
+
+    public function borrow() {
+        return $this->hasMany(Borrow::class, 'borrow_id', 'id');
+    }
 }
