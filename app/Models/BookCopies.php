@@ -19,4 +19,8 @@ class BookCopies extends Model
     public function borrowItem() {
         return $this->hasMany(BorrowItem::class, 'book_copy_id', 'id');
     }
+
+    public function reservations() {
+        return $this->hasMany(Reservation::class, 'book_copy_id', 'id');
+    }
 }

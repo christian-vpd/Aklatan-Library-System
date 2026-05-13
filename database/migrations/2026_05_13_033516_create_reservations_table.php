@@ -11,17 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('borrows', function (Blueprint $table) {
+        Schema::create('reservations', function (Blueprint $table) {
             $table->id();
-            $table->string('borrow_code')->unique(); // BRW-2026-0001
+            $table->string('reservation_code')->unique();
             $table->unsignedBigInteger('patron_id');
             $table->foreign('patron_id')->references('id')->on('patrons')->onDelete('restrict')->onUpdate('cascade');
-            $table->unsignedBigInteger('librarian_id');
-            $table->foreign('librarian_id')->references('id')->on('librarians')->onDelete('restrict')->onUpdate('cascade');
-            $table->timestamp('borrowed_at');
-            $table->date('due_date');
-            $table->enum('status', ['borrowed', 'returned', 'overdue', 'lost']);
-            $table->text('notes')->nullable();
+            $table->unsignedBigInteger('book_copy_id');
+            $table->foreign('book_copy_id')->references('id')->on('book_copies')->onDelete('restrict')->onUpdate('cascade');
+            $table->enum('status', ['pending', 'available', 'claimed']);
+            $table->timestamp('reserved_at');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -32,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('borrows');
+        Schema::dropIfExists('reservations');
     }
 };

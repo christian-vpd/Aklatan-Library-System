@@ -24,4 +24,8 @@ class Patron extends Model
     public function borrow() {
         return $this->hasMany(Borrow::class, 'borrow_id', 'id');
     }
+
+    public function reservations() {
+        return $this->hasMany(Reservation::class, 'patron_type_id', 'id');
+    }
 }
