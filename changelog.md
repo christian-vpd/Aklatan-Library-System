@@ -1,5 +1,11 @@
 # Changelogs
 
+**v0.0.7 - May 14, 2026**
+- Add and Update Migrations, Seeders and Models
+- Add Template along with : Landsay
+- Add Carbon
+- Add Landing Page
+
 **v0.0.6 - May 14, 2026**
 - Add and Update Migrations, Seeders and Models
 
