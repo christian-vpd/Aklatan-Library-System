@@ -1,5 +1,8 @@
 # Changelogs
 
+**v0.0.6 - May 14, 2026**
+- Add and Update Migrations, Seeders and Models
+
 **v0.0.5 - May 13, 2026**
 - Add and Update Migrations, Seeders and Models
 

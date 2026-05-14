@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
             BookAuthorSeeder::class,
             BookCopiesSeeder::class,
             BorrowSettingsSeeder::class,
+            LibraryHoursSeeder::class,
         ]);
     }
 }

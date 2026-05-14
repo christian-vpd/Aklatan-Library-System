@@ -20,4 +20,8 @@ class Librarian extends Model
     public function borrow() {
         return $this->hasMany(Borrow::class, 'borrow_id', 'id');
     }
+
+    public function announcement() {
+        return $this->hasMany(Announcement::class, 'librarian_id', 'id');
+    }
 }
