@@ -1,5 +1,9 @@
 # Changelogs
 
+**v0.2.0 - May 15, 2026**
+- Seeder Adjustment
+- Initiate Templates for Roles Pages
+
 **v0.1.1 - May 15, 2026**
 - Index and Login page have now controlled Middleware
 
