@@ -4,3 +4,6 @@ use Faker\Guesser\Name;
 use Illuminate\Support\Facades\Route;
 
 require __DIR__ .'/auth.php';
+require __DIR__ .'/patron.php';
+require __DIR__ .'/librarian.php';
+require __DIR__ .'/admin.php';

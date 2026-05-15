@@ -1,8 +1,15 @@
 # Changelogs
 
+**v0.1.0 - May 15, 2026**
+- Login is now Fully Functional
+- Add Template along with: Tabler
+- Add Web Routes and Controllers
+- Add RoleMiddleware
+- Add Dashboard for Users
+
 **v0.0.7 - May 14, 2026**
 - Add and Update Migrations, Seeders and Models
-- Add Template along with : Landsay
+- Add Template along with: Landsay
 - Add Carbon
 - Add Landing Page
 

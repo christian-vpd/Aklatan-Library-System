@@ -9,6 +9,7 @@ use App\Models\Patron;
 use App\Models\Categories;
 use App\Models\LibraryHours;
 use App\Models\Announcement;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -29,5 +30,56 @@ class AuthController extends Controller
 
     public function login(Request $request) {
         return view("auth.login");
+    }
+
+    public function loginSubmit(Request $request)
+    {
+        
+        $request->validate([
+            'username' => 'required',
+            'password' => 'required',
+        ]);
+
+        $credentials = [
+            'username' => $request->username,
+            'password' => $request->password,
+        ];
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            $user = Auth::user();
+
+            if ($user->status !== 'active') {
+                Auth::logout();
+                return back()->withErrors([
+                    'username' => 'Account is not active.',
+                ]);
+            }
+
+            if ($user->role === 'superadmin') {
+                return redirect('/admin/dashboard');
+            }
+
+            if ($user->role === 'librarian') {
+                return redirect('/librarian/dashboard');
+            }
+
+            return redirect('/patron/dashboard');
+        }
+
+        return back()->withErrors([
+            'username' => 'Invalid username or password',
+        ])->onlyInput('username');
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/login');
     }
 }
