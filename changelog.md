@@ -1,5 +1,8 @@
 # Changelogs
 
+**v0.1.1 - May 15, 2026**
+- Index and Login page have now controlled Middleware
+
 **v0.1.0 - May 15, 2026**
 - Login is now Fully Functional
 - Add Template along with: Tabler
