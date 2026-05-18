@@ -83,6 +83,62 @@
                         <span class="nav-link-title"> Dashboard </span>
                       </a>
                     </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="{{ route('patron.dashboard') }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-book">
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                          <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+                          <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+                          <path d="M3 6l0 13" />
+                          <path d="M12 6l0 13" />
+                          <path d="M21 6l0 13" />
+                        </svg>
+                        <span class="nav-link-title"> Browse </span>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="{{ route('patron.dashboard') }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-book-2">
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                          <path d="M19 4v16h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12" />
+                          <path d="M19 16h-12a2 2 0 0 0 -2 2" />
+                          <path d="M9 8h6" />
+                        </svg>
+                        <span class="nav-link-title"> Borrows </span>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="{{ route('patron.dashboard') }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-reserved-line">
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                          <path d="M9 20h6" />
+                          <path d="M12 14v6" />
+                          <path d="M4 6a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2l0 -6" />
+                          <path d="M9 9h6" />
+                        </svg>
+                        <span class="nav-link-title"> Reservations </span>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="{{ route('patron.dashboard') }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-file-dollar">
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                          <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+                          <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2" />
+                          <path d="M14 11h-2.5a1.5 1.5 0 0 0 0 3h1a1.5 1.5 0 0 1 0 3h-2.5" />
+                          <path d="M12 17v1m0 -8v1" />
+                        </svg>
+                        <span class="nav-link-title"> Fines </span>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="{{ route('patron.dashboard') }}">
+                        <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler.io/icons/icon/home -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-checklist"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M9.615 20h-2.615a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8" /><path d="M14 19l2 2l4 -4" /><path d="M9 8h4" /><path d="M9 12h2" /></svg>
+                        </span>
+                        <span class="nav-link-title"> Policies </span>
+                      </a>
+                    </li>
                   </ul>
                   <!-- END NAVBAR MENU -->
                 </div>

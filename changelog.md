@@ -1,5 +1,11 @@
 # Changelogs
 
+**v0.2.1 - May 18, 2026**
+- Fix: Hyperlink Bug
+- Enhance Error Login
+- Add New Tables and Seeders: Policies
+- Add Pre-defined Pages Links
+
 **v0.2.0 - May 15, 2026**
 - Seeder Adjustment
 - Initiate Templates for Roles Pages

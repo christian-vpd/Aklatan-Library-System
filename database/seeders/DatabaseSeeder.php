@@ -33,6 +33,8 @@ class DatabaseSeeder extends Seeder
             BookCopiesSeeder::class,
             BorrowSettingsSeeder::class,
             LibraryHoursSeeder::class,
+            PolicyCategorySeeder::class,
+            PolicySeeder::class,
         ]);
     }
 }

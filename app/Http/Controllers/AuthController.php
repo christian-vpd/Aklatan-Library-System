@@ -49,10 +49,17 @@ class AuthController extends Controller
             $request->session()->regenerate();
             $user = Auth::user();
 
-            if ($user->status !== 'active') {
+            if ($user->status == 'inactive') {
                 Auth::logout();
                 return back()->withErrors([
                     'username' => 'Account is not active.',
+                ]);
+            }
+
+            if ($user->status == 'suspended') {
+                Auth::logout();
+                return back()->withErrors([
+                    'username' => 'Account is suspended.',
                 ]);
             }
 

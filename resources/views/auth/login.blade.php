@@ -16,10 +16,6 @@
         * {
             font-family: 'InterVariable', sans-serif;
         }
-
-        ul {
-            list-style-type: none;
-        }
     </style>
 </head>
 <body>
@@ -35,12 +31,12 @@
             <h2 class="h2 text-center mb-4">Login to your account</h2>
             <form id="loginForm" action="{{ route('login.submit') }}" method="post" autocomplete="off" novalidate="">
                 @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul class="mb-0">
+                    <div class="d-flex justify-content-center">
+                        <div class="alert alert-danger py-2 text-center text-danger">
                             @foreach ($errors->all() as $error)
-                                <li class="text-danger">{{ $error }}</li>
+                                <div>{{ $error }}</div>
                             @endforeach
-                        </ul>
+                        </div>
                     </div>
                 @endif
               @csrf
