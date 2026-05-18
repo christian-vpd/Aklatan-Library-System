@@ -1,5 +1,8 @@
 # Changelogs
 
+**v0.2.2 - May 18, 2026**
+- Add Admin Dashboard Page
+
 **v0.2.1 - May 18, 2026**
 - Fix: Hyperlink Bug
 - Enhance Error Login

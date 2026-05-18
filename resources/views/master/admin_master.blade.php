@@ -151,7 +151,7 @@
         <div class="page-body">
           <div class="container-xl">
             <!-- Content here -->
-            @yield('librarian')
+            @yield('admin')
           </div>
         </div>
         <!-- END PAGE BODY -->
