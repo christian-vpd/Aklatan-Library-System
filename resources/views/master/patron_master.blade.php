@@ -33,8 +33,8 @@
 
                     $avatar = asset('assets/images/default_profile.jpg');
 
-                    if (!empty($profilePicture) && file_exists(public_path($profilePicture))) {
-                        $avatar = asset($profilePicture);
+                    if (!empty($profilePicture) && Storage::disk('public')->exists($profilePicture)) {
+                        $avatar = Storage::url($profilePicture);
                     }
                 @endphp
 

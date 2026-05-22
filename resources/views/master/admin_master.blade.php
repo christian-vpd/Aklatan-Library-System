@@ -4,9 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Aklatan | Admin</title>
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ asset('assets/css/tabler/tabler.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/libs/sweetalert/sweetalert.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/libs/toastr/toastr.css') }}">
+
+    {{-- Pre Defined Scripts --}}
+    <script src="{{ asset('assets/js/tabler/tabler.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/sweetalert/sweetalert.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/toastr/toastr.min.js') }}"></script>
 </head>
 <body>
     <div class="page">
@@ -77,8 +86,8 @@
                         <span class="nav-link-title"> Dashboard </span>
                       </a>
                     </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="{{ route('admin.dashboard') }}">
+                    <li class="nav-item {{ request()->routeIs('admin.manage_librarians.index') ? 'active' : '' }}">
+                      <a class="nav-link" href="{{ route('admin.manage_librarians.index') }}">
                         <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler.io/icons/icon/home -->
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-user-cog"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" /><path d="M6 21v-2a4 4 0 0 1 4 -4h2.5" /><path d="M17.001 19a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M19.001 15.5v1.5" /><path d="M19.001 21v1.5" /><path d="M22.032 17.25l-1.299 .75" /><path d="M17.27 20l-1.3 .75" /><path d="M15.97 17.25l1.3 .75" /><path d="M20.733 20l1.3 .75" /></svg>
                         </span>
@@ -181,6 +190,12 @@
       </div>
     </div>
 </body>
-    <script src="{{ asset('assets/js/tabler/tabler.min.js') }}"></script>
-    <script src="{{ asset('assets/libs/jquery/jquery.min.js') }}"></script>
+@if (session('notification'))
+    <script>
+        toastr["{{ session('notification')['alert_type'] }}"](
+            "{{ session('notification')['message'] }}",
+            "{{ session('notification')['title'] }}"
+        );
+    </script>
+@endif
 </html>

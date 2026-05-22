@@ -1,5 +1,10 @@
 # Changelogs
 
+**v0.2.3 - May 22, 2026**
+- Add Admin Manage Librarian Page (Incomplete Yet)
+- BUG FIX: Profile Picture storage
+- Add Following Libraries: DataTables, Sweet Alert, Toastr
+
 **v0.2.2 - May 18, 2026**
 - Add Admin Dashboard Page
 

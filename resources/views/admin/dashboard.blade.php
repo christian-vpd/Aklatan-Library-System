@@ -7,7 +7,17 @@
     <h2 class="page-title">{{Auth::user()->name}}</h2>
     </div>
     <div class="col-auto ms-auto d-print-none">
-        <button class="btn text-primary">{{ \Carbon\Carbon::now('Asia/Manila')->format('F j, Y - g:i A') }} </button>
+        <button class="btn text-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-clock-hour-5">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M3 12a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+            <path d="M12 12l2 3" />
+            <path d="M12 7v5" />
+        </svg>
+        <span id="clock">
+            {{ \Carbon\Carbon::now('Asia/Manila')->format('F j, Y - g:i:s A') }}
+        </span>
+        </button>
     </div>
     <div class="col-12">
         <div class="row row-cards">
@@ -164,4 +174,31 @@
         </div>
     </div>
 </div>
+<script>
+    setInterval(function() {
+        const clockElement = document.getElementById('clock');
+        const now = new Date();
+        
+        const options = {
+            timeZone: 'Asia/Manila',
+            month: 'long',
+            day: 'numeric',
+            year: 'numeric',
+            hour: 'numeric',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: true,
+        };
+
+        const formatter = new Intl.DateTimeFormat('en-US', options);
+            const parts = formatter.formatToParts(now);
+            
+            const hash = {};
+            parts.forEach(p => hash[p.type] = p.value);
+
+            const formattedTime = `${hash.month} ${hash.day}, ${hash.year} - ${hash.hour}:${hash.minute}:${hash.second} ${hash.dayPeriod}`;
+
+            clockElement.textContent = formattedTime;
+        }, 1000);
+</script>
 @endsection
