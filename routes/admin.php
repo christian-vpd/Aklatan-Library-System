@@ -14,4 +14,7 @@ Route::prefix('/admin')->middleware(['auth', 'role:superadmin'])->controller(Lib
     Route::post('manage_librarians/checkEmail', [LibrarianController::class, 'checkEmail'])->name('admin.manage_librarians.checkEmail');
     Route::get('manage_librarians/edit/{user_id}', [LibrarianController::class, 'edit'])->name('admin.manage_librarians.edit');
     Route::post('manage_librarians/update', [LibrarianController::class, 'update'])->name('admin.manage_librarians.update');
+    Route::get('manage_librarians/toggle/{user_id}', [LibrarianController::class, 'toggle'])->name('admin.manage_librarians.toggle');
+    Route::get('manage_librarians/inactive', [LibrarianController::class, 'getInactive'])->name('admin.manage_librarians.inactive');
+    Route::delete('manage_librarians/delete/{user_id}', [LibrarianController::class, 'delete'])->name('admin.manage_librarians.delete');
 });

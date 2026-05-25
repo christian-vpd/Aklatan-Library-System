@@ -1,5 +1,8 @@
 # Changelogs
 
+**v0.3.0 - May 25, 2026**
+- Add Admin Manage Librarian Page (Complete)
+
 **v0.2.3 - May 22, 2026**
 - Add Admin Manage Librarian Page (Incomplete Yet)
 - BUG FIX: Profile Picture storage

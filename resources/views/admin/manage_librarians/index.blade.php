@@ -22,7 +22,21 @@
     </div>
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Active Librarians</h3>
+            <div class="row w-100">
+                <div class="col d-flex align-items-center">
+                    <h3 class="card-title">Active Librarians</h3>
+                </div>
+                <div class="col d-flex justify-content-end">
+                    <button class="btn btn-info" onclick="viewInactiveLibrarian()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-eye">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+                        <path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" />
+                    </svg>
+                    View Inactive Librarians
+                    </button>
+                </div>
+            </div>
         </div>
         <div class="card-body border-bottom py-3">
             <table class="table datatable table-selectable table-vcenter text-nowrap table-responsive" id="librarianTable">
@@ -76,7 +90,7 @@
                                         <path d="M16 5l3 3"></path>
                                         </svg>
                                     </button>
-                                    <button class="btn btn-action" data-toggle="tooltip" data-placement="top" title="Toggle Inactive">
+                                    <button class="btn btn-action" data-toggle="tooltip" data-placement="top" title="Toggle Inactive" onclick="toggleInactive({{$item->id}})">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-user-off">
                                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                             <path d="M8.18 8.189a4.01 4.01 0 0 0 2.616 2.627m3.507 -.545a4 4 0 1 0 -5.59 -5.552" />
@@ -221,9 +235,11 @@ $('#addLibrarianForm').validate({
         title: "Add Librarian?",
         text: "You won't be able to revert this!",
         icon: "warning",
+        allowOutsideClick: false,
+        allowEscapeKey: false,
         showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
+        confirmButtonColor: "#88dd33",
+        cancelButtonColor: "#3085d6",
         confirmButtonText: "Yes, add Librarian!"
             }).then((result) => {
             if (result.isConfirmed) {
@@ -281,6 +297,8 @@ function editLibrarianModal(userId) {
         text: 'Please wait for a while.',
         timer: 0,
         timerProgressBar: true,
+        allowOutsideClick: false,
+        allowEscapeKey: false,
         didOpen: () => {
             Swal.showLoading();
         },
@@ -395,9 +413,11 @@ $('#editLibrarianForm').validate({
         title: "Update Librarian?",
         text: "You won't be able to revert this!",
         icon: "warning",
+        allowOutsideClick: false,
+        allowEscapeKey: false,
         showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
+        confirmButtonColor: "#88dd33",
+        cancelButtonColor: "#3085d6",
         confirmButtonText: "Yes, update it!"
             }).then((result) => {
             if (result.isConfirmed) {
@@ -412,5 +432,275 @@ $('#editLibrarianForm').validate({
 $('input[name="edit_contactNumber"]').on('input', function () {
     this.value = this.value.replace(/[^0-9]/g, '');
 });
+
+function toggleInactive(userId) {
+
+    let url = "{{ route('admin.manage_librarians.toggle', ':id')}}";
+    url = url.replace(':id', userId);
+
+    Swal.fire({
+    title: "Toggle Inactive?",
+    text: "Do you want to mark this librarian as Inactive?",
+    icon: "question",
+    allowOutsideClick: false,
+    allowEscapeKey: false,
+    showCancelButton: true,
+    confirmButtonColor: "#d33",
+    cancelButtonColor: "#3085d6",
+    confirmButtonText: "Yes, toggle it!"
+        }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                title: 'Toggling Active Librarian...',
+                text: 'Please wait for a while.',
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                timer: 0,
+                timerProgressBar: true,
+                didOpen: () => {
+                    Swal.showLoading();
+                },
+            });
+
+            $.ajax({
+                url: url,
+                type: 'GET',
+                success: function(response) {
+                    if(response.status == 'success'){
+                        Swal.fire({
+                            title: "Success!",
+                            text: "Librarian toggled successfully!",
+                            icon: "success"
+                        }).then((result) => {
+                            if(result.isConfirmed)
+                            {
+                                location.reload();
+                            }
+                        });
+                    }
+                },
+                error: function(xhr) {
+                    Swal.close();
+                    toastr.error('Something went wrong', 'Internal Server Error');
+                }
+            });
+        }
+    });
+}
+
+function viewInactiveLibrarian() {
+    Swal.fire({
+        title: 'Fetching Inactive Librarians...',
+        text: 'Please wait for a while.',
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        didOpen: () => {
+            Swal.showLoading();
+        },
+    });
+
+    let url = "{{ route('admin.manage_librarians.inactive') }}";
+
+    $.ajax({
+        url: url,
+        type: 'GET',
+        success: function(response) {
+            Swal.close();
+
+            let tbody = '';
+
+            response.forEach(item => {
+                let avatar = item.librarian.profile_picture
+                    ? `/storage/${item.librarian.profile_picture}`
+                    : `{{ asset('assets/images/default_profile.jpg') }}`;
+
+                let fullName = `${item.librarian.first_name} ${item.librarian.middle_name ? item.librarian.middle_name.charAt(0).toUpperCase() + '.' : ''} ${item.librarian.last_name} ${item.librarian.suffix ?? ''}`;
+
+                tbody += `
+                    <tr>
+                        <td>${item.librarian.librarian_code}</td>
+                        <td>
+                            <div class="row">
+                                <div class="col-2">
+                                    <span class="avatar avatar-md" style="background-image: url('${avatar}')"></span>
+                                </div>
+                                <div class="col-10 text-start d-flex flex-column">
+                                    <div class="fw-bold">${fullName}</div>
+                                    <div>${item.email}</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>${item.librarian.gender ?? ''}</td>
+                        <td>
+                            <div class="btn-actions d-flex justify-content-center align-items-center">
+                                <button class="btn btn-action" data-toggle="tooltip" data-placement="top" title="Toggle Ative" onclick="toggleActive(${item.id})">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-user-check">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+                                        <path d="M6 21v-2a4 4 0 0 1 4 -4h4" />
+                                        <path d="M15 19l2 2l4 -4" />
+                                    </svg>
+                                </button>
+
+                                <button class="btn btn-action" title="Delete" onclick="deleteLibrarian(${item.id})">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-trash">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path d="M4 7l16 0" />
+                                        <path d="M10 11l0 6" />
+                                        <path d="M14 11l0 6" />
+                                        <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                                        <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            $('#inactiveLibrarianTbody').html(tbody);
+
+            $('#view-inactive-librarian-modal').modal('show');
+
+            // Re-init DataTable safely
+            if ($.fn.DataTable.isDataTable('#inactiveLibrarianTable')) {
+                $('#inactiveLibrarianTable').DataTable().destroy();
+            }
+
+            $('#inactiveLibrarianTable').DataTable({
+                columnDefs: [
+                    {
+                        className: "dt-center",
+                        targets: "_all"
+                    },
+                    {
+                        targets: [-1],
+                        searchable: false,
+                        orderable: false,
+                    }
+                ],
+                order: [[0, "desc"]],
+                paging: true,
+                searching: true,
+                ordering: true,
+                responsive: true,
+            });
+        },
+        error: function() {
+            Swal.close();
+            toastr.error('Something went wrong', 'Internal Server Error');
+        }
+    });
+}
+
+function toggleActive(userId) {
+
+    let url = "{{ route('admin.manage_librarians.toggle', ':id')}}";
+    url = url.replace(':id', userId);
+
+    Swal.fire({
+    title: "Toggle Active?",
+    text: "Do you want to mark this librarian as Active?",
+    icon: "question",
+    allowOutsideClick: false,
+    allowEscapeKey: false,
+    showCancelButton: true,
+    confirmButtonColor: "#88dd33",
+    cancelButtonColor: "#3085d6",
+    confirmButtonText: "Yes, toggle it!"
+        }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                title: 'Toggling Inactive Librarian...',
+                text: 'Please wait for a while.',
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                timer: 0,
+                timerProgressBar: true,
+                didOpen: () => {
+                    Swal.showLoading();
+                },
+            });
+
+            $.ajax({
+                url: url,
+                type: 'GET',
+                success: function(response) {
+                    if(response.status == 'success'){
+                        Swal.fire({
+                            title: "Success!",
+                            text: "Librarian toggled successfully!",
+                            icon: "success"
+                        }).then((result) => {
+                            if(result.isConfirmed)
+                            {
+                                location.reload();
+                            }
+                        });
+                    }
+                },
+                error: function(xhr) {
+                    Swal.close();
+                    toastr.error('Something went wrong', 'Internal Server Error');
+                }
+            });
+        }
+    });
+}
+
+function deleteLibrarian(userId) {
+
+    let url = "{{ route('admin.manage_librarians.delete', ':id')}}";
+    url = url.replace(':id', userId);
+
+    Swal.fire({
+    title: "Delete Librarian Permanently?",
+    text: "This cannot be undone and access anymore.",
+    icon: "warning",
+    allowOutsideClick: false,
+    allowEscapeKey: false,
+    showCancelButton: true,
+    confirmButtonColor: "#d33",
+    cancelButtonColor: "#3085d6",
+    confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                title: 'Deleting Librarian...',
+                text: 'Please wait for a while.',
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                timer: 0,
+                timerProgressBar: true,
+                didOpen: () => {
+                    Swal.showLoading();
+                },
+            });
+
+            $.ajax({
+                url: url,
+                type: 'DELETE',
+                success: function(response) {
+                    if(response.status == 'success'){
+                        Swal.fire({
+                            title: "Success!",
+                            text: "Librarian Deleted successfully!",
+                            icon: "success"
+                        }).then((result) => {
+                            if(result.isConfirmed)
+                            {
+                                location.reload();
+                            }
+                        });
+                    }
+                },
+                error: function(xhr) {
+                    Swal.close();
+                    toastr.error('Something went wrong', 'Internal Server Error');
+                }
+            });
+        }
+    });
+}
 </script>
 @endsection

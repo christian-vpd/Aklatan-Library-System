@@ -27,7 +27,7 @@
                         <path d="M11 12h1v4h1"></path>
                     </svg>
                     </div>
-                    To access librarian account, Username and Password is the Librarian Code. Please change your password once your account get access.
+                    To access librarian account, Username and Password is the Librarian Code. Please change your password once you get access to the account.
                 </div>
                 <form method="POST" action="{{ route('admin.manage_librarians.store') }}" id="addLibrarianForm" enctype="multipart/form-data">
                 @csrf
@@ -35,11 +35,11 @@
                     <label class="form-label">Librarian Code</label>
                     <div class="row d-flex align-items-center">
                         <div class="col-8">
-                            <input type="text" class="form-control" name="libraryCode" placeholder="Auto-Generated Librarian Code" id="libraryCode" disabled>
+                            <input type="text" class="form-control" name="libraryCode" placeholder="Auto-Generated Librarian Code" id="libraryCode" maxlength="20" disabled>
                         </div>
                         <div class="col-4">
                             <label class="form-check">
-                                <input class="form-check-input" type="checkbox" onclick="toggleAddCustomCode()" name="customCodeCheck" id="customCodeCheck" maxlength="20">
+                                <input class="form-check-input" type="checkbox" onclick="toggleAddCustomCode()" name="customCodeCheck" id="customCodeCheck">
                                 <span class="form-check-label">Custom Code</span>
                             </label>
                         </div>
@@ -195,6 +195,38 @@
             </div>
                 
             </form>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-blur fade" id="view-inactive-librarian-modal" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Inactive Librarians</h5>
+            </div>
+            <div class="modal-body">
+                <table class="table datatable table-selectable table-vcenter text-nowrap table-responsive" id="inactiveLibrarianTable">
+                    <thead>
+                        <tr>
+                            <th>Librarian Code</th>
+                            <th>Profile</th>
+                            <th>Gender</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="inactiveLibrarianTbody">
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" class="btn-close" data-bs-dismiss="modal">
+                    Close
+                </button>
+            </div>
+                
 
         </div>
     </div>

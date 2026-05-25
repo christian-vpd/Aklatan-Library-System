@@ -213,4 +213,68 @@ class LibrarianController extends Controller
             ], 500);
         }
     }
+
+    public function toggle(Request $request, int $userId) {
+        DB::beginTransaction();
+
+        try
+        {
+            $user = User::find($userId);
+            
+            $user->status = $user->status == 'active' ? 'inactive' : 'active';
+            $user->save();
+            
+            DB::commit();
+
+            return response()->json([
+                'status' => 'success',
+            ], 200);
+
+        }
+        catch (\Exception $e)
+        {
+            DB::rollBack();
+
+            return response()->json([
+                'message' => 'Internal Server Error.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function getInactive(Request $request) {
+        $librarian = User::with('librarian')
+        ->where('status', 'inactive')
+        ->where('deleted_at', null)
+        ->where('role', 'librarian')
+        ->get();
+
+        return response()->json($librarian);
+    }
+
+    public function delete(int $userId) {
+        DB::beginTransaction();
+
+        try
+        {
+            $user = User::find($userId);
+            $user->delete();
+            
+            DB::commit();
+
+            return response()->json([
+                'status' => 'success',
+            ], 200);
+
+        }
+        catch (\Exception $e)
+        {
+            DB::rollBack();
+
+            return response()->json([
+                'message' => 'Internal Server Error.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
 }
