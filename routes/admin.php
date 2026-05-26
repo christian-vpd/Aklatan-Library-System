@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\admin\LibrarianController;
+use App\Http\Controllers\admin\LibraryHoursController;
 
 Route::prefix('/admin')->middleware(['auth', 'role:superadmin'])->controller(AdminController::class)->group(function() {
     Route::get('dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
@@ -17,4 +18,9 @@ Route::prefix('/admin')->middleware(['auth', 'role:superadmin'])->controller(Lib
     Route::get('manage_librarians/toggle/{user_id}', [LibrarianController::class, 'toggle'])->name('admin.manage_librarians.toggle');
     Route::get('manage_librarians/inactive', [LibrarianController::class, 'getInactive'])->name('admin.manage_librarians.inactive');
     Route::delete('manage_librarians/delete/{user_id}', [LibrarianController::class, 'delete'])->name('admin.manage_librarians.delete');
+});
+
+Route::prefix('/admin/library_hours')->middleware(['auth', 'role:superadmin'])->controller(LibraryHoursController::class)->group(function () {
+    Route::get('index', [LibraryHoursController::class, 'index'])->name('admin.library_hours.index');
+    Route::post('update', [LibraryHoursController::class, 'update'])->name('admin.library_hours.update');
 });

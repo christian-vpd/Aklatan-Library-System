@@ -1,5 +1,8 @@
 # Changelogs
 
+**v0.4.0 - May 26, 2026**
+- Add Admin Library Hours Page (Complete)
+
 **v0.3.0 - May 25, 2026**
 - Add Admin Manage Librarian Page (Complete)
 
