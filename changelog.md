@@ -1,5 +1,9 @@
 # Changelogs
 
+**v0.5.0 - May 27, 2026**
+- Add Admin Policies Page (Complete)
+- Minor Model Adjustments
+
 **v0.4.0 - May 26, 2026**
 - Add Admin Library Hours Page (Complete)
 

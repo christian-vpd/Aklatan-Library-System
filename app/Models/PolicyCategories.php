@@ -9,6 +9,6 @@ class PolicyCategories extends Model
     protected $guarded = [];
 
     public function policies() {
-        return $this->hasMany(Policies::class, 'policy_category_id'. 'id');
+        return $this->hasMany(Policies::class, 'policy_category_id', 'id');
     }
 }

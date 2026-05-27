@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\admin\LibrarianController;
 use App\Http\Controllers\admin\LibraryHoursController;
+use App\Http\Controllers\admin\PoliciesController;
 
 Route::prefix('/admin')->middleware(['auth', 'role:superadmin'])->controller(AdminController::class)->group(function() {
     Route::get('dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
@@ -23,4 +24,17 @@ Route::prefix('/admin')->middleware(['auth', 'role:superadmin'])->controller(Lib
 Route::prefix('/admin/library_hours')->middleware(['auth', 'role:superadmin'])->controller(LibraryHoursController::class)->group(function () {
     Route::get('index', [LibraryHoursController::class, 'index'])->name('admin.library_hours.index');
     Route::post('update', [LibraryHoursController::class, 'update'])->name('admin.library_hours.update');
+});
+
+Route::prefix('/admin/policies')->middleware(['auth', 'role:superadmin'])->controller(PoliciesController::class)->group(function () {
+    Route::get('index', [PoliciesController::class, 'index'])->name('admin.policies.index');
+    Route::get('category/{category_id}', [PoliciesController::class, 'category'])->name('admin.policies.category');
+    // Category
+    Route::post('category/store', [PoliciesController::class, 'categoryStore'])->name('admin.policies.category.store');
+    Route::post('category/update', [PoliciesController::class, 'categoryUpdate'])->name('admin.policies.category.update');
+    Route::delete('category/delete/{category_id}', [PoliciesController::class, 'categoryDelete'])->name('admin.policies.category.delete');
+    // Policy
+    Route::post('store', [PoliciesController::class, 'store'])->name('admin.policies.store');
+    Route::post('update', [PoliciesController::class, 'update'])->name('admin.policies.update');
+    Route::delete('delete/{policy_id}', [PoliciesController::class, 'delete'])->name('admin.policies.delete');
 });
