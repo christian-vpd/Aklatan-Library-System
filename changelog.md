@@ -1,5 +1,8 @@
 # Changelogs
 
+**v0.6.0 - May 29, 2026**
+- Add Librarian Dashboard Page
+
 **v0.5.1 - May 29, 2026**
 - Adjust all the master layouts
 - Removed "Borrow Settings" for Admin Side
