@@ -4,9 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Aklatan | Librarian</title>
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ asset('assets/css/tabler/tabler.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/libs/sweetalert/sweetalert.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/libs/toastr/toastr.css') }}">
+
+    {{-- Pre Defined Scripts --}}
+    <script src="{{ asset('assets/js/tabler/tabler.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/sweetalert/sweetalert.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/toastr/toastr.min.js') }}"></script>
 </head>
 <body>
     <div class="page">
@@ -234,6 +243,12 @@
       </div>
     </div>
 </body>
-    <script src="{{ asset('assets/js/tabler/tabler.min.js') }}"></script>
-    <script src="{{ asset('assets/libs/jquery/jquery.min.js') }}"></script>
+@if (session('notification'))
+    <script>
+        toastr["{{ session('notification')['alert_type'] }}"](
+            "{{ session('notification')['message'] }}",
+            "{{ session('notification')['title'] }}"
+        );
+    </script>
+@endif
 </html>

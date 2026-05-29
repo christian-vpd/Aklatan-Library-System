@@ -1,5 +1,9 @@
 # Changelogs
 
+**v0.5.1 - May 29, 2026**
+- Adjust all the master layouts
+- Removed "Borrow Settings" for Admin Side
+
 **v0.5.0 - May 27, 2026**
 - Add Admin Policies Page (Complete)
 - Minor Model Adjustments
