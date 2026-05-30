@@ -4,7 +4,7 @@
     <div class="row g-2 align-items-center mb-4">
         <div class="col">
         <!-- Page pre-title -->
-        <div class="page-pretitle">Admin</div>
+        <div class="page-pretitle">Librarian</div>
             <h2 class="page-title" id="greetings"></h2>
         </div>
     </div>

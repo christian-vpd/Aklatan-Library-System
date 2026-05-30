@@ -1,5 +1,10 @@
 # Changelogs
 
+**v0.7.0 - May 30, 2026**
+- Add Librarian Patron Type Page
+- Adjust Icons on Confirmations
+- Revised Database
+
 **v0.6.0 - May 29, 2026**
 - Add Librarian Dashboard Page
 

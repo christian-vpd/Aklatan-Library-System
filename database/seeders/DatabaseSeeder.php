@@ -31,7 +31,6 @@ class DatabaseSeeder extends Seeder
             BookSeeder::class,
             BookAuthorSeeder::class,
             BookCopiesSeeder::class,
-            BorrowSettingsSeeder::class,
             LibraryHoursSeeder::class,
             PolicyCategorySeeder::class,
             PolicySeeder::class,

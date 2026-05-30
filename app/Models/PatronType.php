@@ -21,7 +21,4 @@ class PatronType extends Model
         return $this->belongsTo(User::class,'added_by');
     }
 
-    public function borrowSettings() {
-        return $this->hasOne(BorrowSettings::class, 'patron_type_id', 'id');
-    }
 }

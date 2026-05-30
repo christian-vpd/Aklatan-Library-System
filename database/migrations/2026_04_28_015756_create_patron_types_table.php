@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('description');
             $table->unsignedBigInteger('added_by');
             $table->foreign('added_by')->references('id')->on('users')->onDelete('restrict')->onUpdate('cascade');
+            $table->unsignedTinyInteger('max_books');
+            $table->unsignedTinyInteger('borrow_days');
             $table->softDeletes();
             $table->timestamps();
         });

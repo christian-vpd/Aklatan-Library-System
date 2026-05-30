@@ -234,7 +234,7 @@ $('#addLibrarianForm').validate({
         Swal.fire({
         title: "Add Librarian?",
         text: "You won't be able to revert this!",
-        icon: "warning",
+        icon: "question",
         allowOutsideClick: false,
         allowEscapeKey: false,
         showCancelButton: true,
@@ -412,7 +412,7 @@ $('#editLibrarianForm').validate({
         Swal.fire({
         title: "Update Librarian?",
         text: "You won't be able to revert this!",
-        icon: "warning",
+        icon: "question",
         allowOutsideClick: false,
         allowEscapeKey: false,
         showCancelButton: true,
