@@ -1,5 +1,8 @@
 # Changelogs
 
+**v0.8.0 - June 1, 2026**
+- Add Librarian Author Page
+
 **v0.7.0 - May 30, 2026**
 - Add Librarian Patron Type Page
 - Adjust Icons on Confirmations
