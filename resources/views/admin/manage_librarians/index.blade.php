@@ -11,7 +11,7 @@
         </div>
         <!-- Page title actions -->
         <div class="col-auto ms-auto d-print-none">
-            <button class="btn btn-primary btn-5 d-none d-sm-inline-block" data-bs-toggle="modal" data-bs-target="#add-librarian-modal">
+            <button class="btn btn-primary btn-5" data-bs-toggle="modal" data-bs-target="#add-librarian-modal">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-2">
                 <path d="M12 5l0 14"></path>
                 <path d="M5 12l14 0"></path>
@@ -52,12 +52,12 @@
                     @if($librarians)
                         @foreach ($librarians as $item)    
                         <tr>
-                            <td>{{ $item->librarian->librarian_code}}</td>
+                            <td>{{ $item->librarian_code}}</td>
                             <td>
                                 <div class="row">
                                     <div class="col-2">
                                         @php
-                                            $profilePicture = $item->librarian->profile_picture;
+                                            $profilePicture = $item->profile_picture;
 
                                             $avatar = asset('assets/images/default_profile.jpg');
 
@@ -69,28 +69,28 @@
                                     </div>
                                     <div class="col-10 text-start d-flex flex-column">
                                         <div class="fw-bold">
-                                            {{ $item->librarian->first_name}}
-                                            {{ $item->librarian->middle_name ? substr(strtoupper($item->librarian->middle_name), 0, 1) . '.' : '' }}
-                                            {{ $item->librarian->last_name}}
-                                            {{ $item->librarian->suffix ?? '' }}
+                                            {{ $item->first_name}}
+                                            {{ $item->middle_name ? substr(strtoupper($item->middle_name), 0, 1) . '.' : '' }}
+                                            {{ $item->last_name}}
+                                            {{ $item->suffix ?? '' }}
                                         </div>
                                         <div>
-                                            {{ $item->email}}
+                                            {{ $item->user->email}}
                                         </div>
                                     </div>
                                 </div>
                             </td>
-                            <td>{{ $item->librarian->gender}}</td>
+                            <td>{{ $item->gender}}</td>
                             <td>
                                 <div class="btn-actions d-flex justify-content-center align-items-center">
-                                    <button class="btn btn-action" data-toggle="tooltip" data-placement="top" title="Edit" onclick="editLibrarianModal({{$item->id}})">
+                                    <button class="btn btn-action" data-toggle="tooltip" data-placement="top" title="Edit" onclick="editLibrarianModal({{$item->user->id}})">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-1">
                                         <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1"></path>
                                         <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"></path>
                                         <path d="M16 5l3 3"></path>
                                         </svg>
                                     </button>
-                                    <button class="btn btn-action" data-toggle="tooltip" data-placement="top" title="Toggle Inactive" onclick="toggleInactive({{$item->id}})">
+                                    <button class="btn btn-action" data-toggle="tooltip" data-placement="top" title="Toggle Inactive" onclick="toggleInactive({{$item->user->id}})">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-user-off">
                                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                             <path d="M8.18 8.189a4.01 4.01 0 0 0 2.616 2.627m3.507 -.545a4 4 0 1 0 -5.59 -5.552" />
@@ -510,15 +510,15 @@ function viewInactiveLibrarian() {
             let tbody = '';
 
             response.forEach(item => {
-                let avatar = item.librarian.profile_picture
-                    ? `/storage/${item.librarian.profile_picture}`
+                let avatar = item.profile_picture
+                    ? `/storage/${item.profile_picture}`
                     : `{{ asset('assets/images/default_profile.jpg') }}`;
 
-                let fullName = `${item.librarian.first_name} ${item.librarian.middle_name ? item.librarian.middle_name.charAt(0).toUpperCase() + '.' : ''} ${item.librarian.last_name} ${item.librarian.suffix ?? ''}`;
+                let fullName = `${item.first_name} ${item.middle_name ? item.middle_name.charAt(0).toUpperCase() + '.' : ''} ${item.last_name} ${item.suffix ?? ''}`;
 
                 tbody += `
                     <tr>
-                        <td>${item.librarian.librarian_code}</td>
+                        <td>${item.librarian_code}</td>
                         <td>
                             <div class="row">
                                 <div class="col-2">
@@ -526,14 +526,14 @@ function viewInactiveLibrarian() {
                                 </div>
                                 <div class="col-10 text-start d-flex flex-column">
                                     <div class="fw-bold">${fullName}</div>
-                                    <div>${item.email}</div>
+                                    <div>${item.user.email}</div>
                                 </div>
                             </div>
                         </td>
-                        <td>${item.librarian.gender ?? ''}</td>
+                        <td>${item.gender ?? ''}</td>
                         <td>
                             <div class="btn-actions d-flex justify-content-center align-items-center">
-                                <button class="btn btn-action" data-toggle="tooltip" data-placement="top" title="Toggle Ative" onclick="toggleActive(${item.id})">
+                                <button class="btn btn-action" data-toggle="tooltip" data-placement="top" title="Toggle Ative" onclick="toggleActive(${item.user.id})">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-user-check">
                                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                         <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
@@ -542,7 +542,7 @@ function viewInactiveLibrarian() {
                                     </svg>
                                 </button>
 
-                                <button class="btn btn-action" title="Delete" onclick="deleteLibrarian(${item.id})">
+                                <button class="btn btn-action" title="Delete" onclick="deleteLibrarian(${item.user.id})">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-trash">
                                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                         <path d="M4 7l16 0" />

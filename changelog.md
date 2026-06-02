@@ -1,5 +1,12 @@
 # Changelogs
 
+**v0.9.0 - June 2, 2026**
+- Add Librarian Patron Page
+- Adjust Patron Seeders
+- FIX: Missing "Add" Buttons on all Pages
+- Adjust Librarian and Patron Queries
+- Addional Routes and Controllers
+
 **v0.8.0 - June 1, 2026**
 - Add Librarian Author Page
 

@@ -1,52 +1,71 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\librarian;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Librarian;
-use App\Models\User;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
+use App\Models\User;
+use App\Models\Patron;
+use App\Models\PatronType;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
 
-class LibrarianController extends Controller
+class PatronController extends Controller
 {
     public function index(Request $request) {
 
-        $librarians = Librarian::with([
-            'user:id,status,email'
+        $patronType = PatronType::get();
+
+        $patrons = Patron::with([
+            'user:id,status,email',
         ])
         ->whereHas('user', function ($query) {
-            $query->where('status', 'active')
-                ->where('role', 'librarian')
+            $query->where('role', 'patron')
                 ->whereNull('deleted_at');
         })
         ->latest()
+        ->limit(100)
         ->get();
 
-        return view('admin.manage_librarians.index', compact('librarians'));
+        return view('librarian.patron.index', compact('patronType', 'patrons'));
+        
     }
 
-    private function generateLibrarianCode()
+    public function checkEmail(Request $request) {
+        $query = User::withTrashed()
+        ->where('email', $request->email);
+
+        // IMPORTANT: exclude current user in edit mode
+        if ($request->user_id) {
+            $query->where('id', '!=', $request->user_id);
+        }
+
+        // Checking
+        $exists = $query->exists();
+
+        return response()->json(!$exists);
+    }
+
+    private function generatePatronCode()
     {
         $year = now()->format('Y');
 
-        $last = Librarian::withTrashed()
-            ->where('librarian_code', 'like', "LIBRA{$year}%")
-            ->orderBy('librarian_code', 'desc')
+        $last = Patron::withTrashed()
+            ->where('patron_code', 'like', "PAT{$year}%")
+            ->orderBy('patron_code', 'desc')
             ->first();
 
         if (!$last) {
-            return "LIBRA{$year}001";
+            return "PAT{$year}001";
         }
 
-        $number = (int) substr($last->librarian_code, -3);
+        $number = (int) substr($last->patron_code, -3);
         $next = str_pad($number + 1, 3, '0', STR_PAD_LEFT);
 
-        return "LIBRA{$year}{$next}";
+        return "PAT{$year}{$next}";
     }
 
     public function store (Request $request) {
@@ -55,15 +74,11 @@ class LibrarianController extends Controller
 
         try {
 
-            // Determine librarian code
-            $librarianCode = $request->libraryCode;
-
-            if (!$request->has('customCodeCheck') || !$librarianCode) {
-                $librarianCode = $this->generateLibrarianCode();
-            }
+            // Determine patron code
+            $patronCode = $this->generatePatronCode();
 
             // Build User
-            $username = $librarianCode;
+            $username = $patronCode;
             $name = $request->firstName . ' ' . $request->lastName;
 
             // Profile Picture
@@ -87,12 +102,12 @@ class LibrarianController extends Controller
                 'username' => $username,
                 'email' => $request->email,
                 'password' => Hash::make($username),
-                'role' => 'librarian',
+                'role' => 'patron',
             ]);
 
-            Librarian::create([
+            Patron::create([
                 'user_id' => $user->id,
-                'librarian_code' => $librarianCode,
+                'patron_code' => $patronCode,
                 'last_name' => $request->lastName,
                 'first_name' => $request->firstName,
                 'middle_name' => $request->middleName ?? null,
@@ -100,18 +115,19 @@ class LibrarianController extends Controller
                 'gender' => $request->gender,
                 'contact_number' => $request->contactNumber,
                 'profile_picture' => $profilePath,
+                'patron_type_id' => $request->patronType,
             ]);
 
             DB::commit();
 
             $notification = [
-                'message' => 'Librarian added successfully.',
+                'message' => 'Patron added successfully.',
                 'alert_type' => 'success',
                 'title' => 'Success',
             ];
 
             return redirect()
-                ->route('admin.manage_librarians.index')
+                ->route('librarian.patron.index')
                 ->with('notification', $notification);
 
         }
@@ -127,23 +143,8 @@ class LibrarianController extends Controller
         }
     }
 
-    public function checkEmail(Request $request) {
-        $query = User::withTrashed()
-        ->where('email', $request->email);
-
-        // IMPORTANT: exclude current user in edit mode
-        if ($request->user_id) {
-            $query->where('id', '!=', $request->user_id);
-        }
-
-        // Checking
-        $exists = $query->exists();
-
-        return response()->json(!$exists);
-    }
-
     public function edit(Request $request, int $userId) {
-        $user = User::with('librarian')
+        $user = User::with('patron')
         ->find($userId);
 
         return response()->json($user);
@@ -157,13 +158,13 @@ class LibrarianController extends Controller
 
             $userId = $request->edit_user_id;
 
-            $user = User::with('librarian')->findOrFail($userId);
-            $librarian = $user->librarian;
+            $user = User::with('patron')->findOrFail($userId);
+            $patron = $user->patron;
 
             // Full name
             $name = $request->edit_firstName . ' ' . $request->edit_lastName;
 
-            $profilePath = $librarian->profile_picture;
+            $profilePath = $patron->profile_picture;
 
             if ($request->hasFile('edit_profilePicture')) {
 
@@ -185,9 +186,10 @@ class LibrarianController extends Controller
             $user->update([
                 'name' => $name,
                 'email' => $request->edit_email,
+                'status' => $request->edit_status,
             ]);
 
-            $librarian->update([
+            $patron->update([
                 'last_name' => $request->edit_lastName,
                 'first_name' => $request->edit_firstName,
                 'middle_name' => $request->edit_middleName ?? null,
@@ -195,14 +197,15 @@ class LibrarianController extends Controller
                 'gender' => $request->edit_gender,
                 'contact_number' => $request->edit_contactNumber,
                 'profile_picture' => $profilePath,
+                'patron_type_id' => $request->edit_patronType,
             ]);
 
             DB::commit();
 
             return redirect()
-                ->route('admin.manage_librarians.index')
+                ->route('librarian.patron.index')
                 ->with('notification', [
-                    'message' => 'Librarian updated successfully.',
+                    'message' => 'Patron updated successfully.',
                     'alert_type' => 'success',
                     'title' => 'Success',
                 ]);
@@ -216,48 +219,6 @@ class LibrarianController extends Controller
                 'error' => $e->getMessage(),
             ], 500);
         }
-    }
-
-    public function toggle(Request $request, int $userId) {
-        DB::beginTransaction();
-
-        try
-        {
-            $user = User::find($userId);
-            
-            $user->status = $user->status == 'active' ? 'inactive' : 'active';
-            $user->save();
-            
-            DB::commit();
-
-            return response()->json([
-                'status' => 'success',
-            ], 200);
-
-        }
-        catch (\Exception $e)
-        {
-            DB::rollBack();
-
-            return response()->json([
-                'message' => 'Internal Server Error.',
-                'error' => $e->getMessage(),
-            ], 500);
-        }
-    }
-
-    public function getInactive(Request $request) {
-        $librarian = Librarian::with([
-            'user:id,status,email'
-        ])
-        ->whereHas('user', function ($query) {
-            $query->where('status', 'inactive')
-                ->where('role', 'librarian')
-                ->whereNull('deleted_at');
-        })
-        ->get();
-
-        return response()->json($librarian);
     }
 
     public function delete(int $userId) {
@@ -278,11 +239,42 @@ class LibrarianController extends Controller
         catch (\Exception $e)
         {
             DB::rollBack();
-
+            Log::info($e);
             return response()->json([
                 'message' => 'Internal Server Error.',
                 'error' => $e->getMessage(),
             ], 500);
         }
+    }
+
+    public function filter(Request $request) {
+        $patronType = PatronType::all();
+
+        $query = Patron::with([
+            'user:id,status,email'
+        ])
+        ->whereHas('user', function ($query) use ($request) {
+            $query->where('role', 'patron')
+                ->whereNull('deleted_at');
+
+            if ($request->filled('filter_status')) {
+                $query->where('status', $request->filter_status);
+            };
+        });
+
+        if ($request->filled('filter_gender')) {
+            $query->where('gender', $request->filter_gender);
+        };
+
+        if ($request->filled('filter_patron_type_id')) {
+            $query->where('patron_type_id', $request->filter_patron_type_id);
+        };
+
+        $patrons = $query
+        ->latest()
+        ->limit(200)
+        ->get();
+
+        return view('librarian.patron.index', compact('patronType', 'patrons'));
     }
 }

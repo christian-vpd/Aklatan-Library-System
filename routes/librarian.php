@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LibrarianController;
 use App\Http\Controllers\librarian\PatronTypesController;
 use App\Http\Controllers\librarian\AuthorController;
+use App\Http\Controllers\librarian\PatronController;
 
 Route::prefix('/librarian')->middleware(['auth', 'role:librarian'])->controller(LibrarianController::class)->group(function() {
     Route::get('dashboard', [LibrarianController::class, 'dashboard'])->name('librarian.dashboard');
@@ -14,6 +15,16 @@ Route::prefix('librarian/author')->middleware(['auth', 'role:librarian'])->contr
     Route::post('store', [AuthorController::class, 'store'])->name('librarian.author.store');
     Route::post('update', [AuthorController::class, 'update'])->name('librarian.author.update');
     Route::delete('delete/{author_id}', [AuthorController::class, 'delete'])->name('librarian.author.delete');
+});
+
+Route::prefix('librarian/patrons')->middleware(['auth', 'role:librarian'])->controller(PatronController::class)->group(function() {
+    Route::get('index', [PatronController::class, 'index'])->name('librarian.patron.index');
+    Route::post('checkEmail', [PatronController::class, 'checkEmail'])->name('librarian.patron.checkEmail');
+    Route::post('store', [PatronController::class, 'store'])->name('librarian.patron.store');
+    Route::get('edit/{user_id}', [PatronController::class, 'edit'])->name('librarian.patron.edit');
+    Route::post('update', [PatronController::class, 'update'])->name('librarian.patron.update');
+    Route::delete('delete/{user_id}', [PatronController::class, 'delete'])->name('librarian.patron.delete');
+    Route::get('filter', [PatronController::class, 'filter'])->name('librarian.patron.filter');
 });
 
 Route::prefix('librarian/patron_types')->middleware(['auth', 'role:librarian'])->controller(PatronTypesController::class)->group(function () {

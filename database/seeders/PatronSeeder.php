@@ -53,7 +53,7 @@ class PatronSeeder extends Seeder
         $patrons = [
             [
                 'user_id' => $insertedUsers['johndoe@example.com']->id,
-                'patron_code' => 'PAT-2026-001',
+                'patron_code' => 'PAT2026001',
                 'last_name' => 'Doe',
                 'first_name' => 'John',
                 'patron_type_id' => 1,
@@ -62,7 +62,7 @@ class PatronSeeder extends Seeder
             ],
             [
                 'user_id' => $insertedUsers['janedoe@example.com']->id,
-                'patron_code' => 'PAT-2026-002',
+                'patron_code' => 'PAT2026002',
                 'last_name' => 'Doe',
                 'first_name' => 'Jane',
                 'patron_type_id' => 1,
@@ -71,7 +71,7 @@ class PatronSeeder extends Seeder
             ],
             [
                 'user_id' => $insertedUsers['johnsmith@example.com']->id,
-                'patron_code' => 'PAT-2026-003',
+                'patron_code' => 'PAT2026003',
                 'last_name' => 'Smith',
                 'first_name' => 'John',
                 'patron_type_id' => 1,

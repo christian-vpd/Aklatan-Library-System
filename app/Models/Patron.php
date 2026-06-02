@@ -28,4 +28,8 @@ class Patron extends Model
     public function reservations() {
         return $this->hasMany(Reservation::class, 'patron_type_id', 'id');
     }
+
+    public function fines() {
+        return $this->hasMany(Fine::class, 'patron_id', 'id');
+    }
 }
