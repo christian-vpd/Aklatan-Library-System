@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Announcement extends Model
 {
+    use SoftDeletes;
+    
     protected $guarded = [];
 
     public function librarian() {

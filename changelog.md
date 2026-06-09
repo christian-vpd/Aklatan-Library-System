@@ -1,5 +1,8 @@
 # Changelogs
 
+**v0.10.0 - June 9, 2026**
+- Add Librarian Announcement Page
+
 **v0.9.0 - June 2, 2026**
 - Add Librarian Patron Page
 - Adjust Patron Seeders

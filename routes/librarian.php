@@ -5,6 +5,7 @@ use App\Http\Controllers\LibrarianController;
 use App\Http\Controllers\librarian\PatronTypesController;
 use App\Http\Controllers\librarian\AuthorController;
 use App\Http\Controllers\librarian\PatronController;
+use App\Http\Controllers\librarian\AnnouncementController;
 
 Route::prefix('/librarian')->middleware(['auth', 'role:librarian'])->controller(LibrarianController::class)->group(function() {
     Route::get('dashboard', [LibrarianController::class, 'dashboard'])->name('librarian.dashboard');
@@ -32,4 +33,13 @@ Route::prefix('librarian/patron_types')->middleware(['auth', 'role:librarian'])-
     Route::post('store', [PatronTypesController::class, 'store'])->name('librarian.patronType.store');
     Route::post('update', [PatronTypesController::class, 'update'])->name('librarian.patronType.update');
     Route::delete('delete/{patron_type_id}', [PatronTypesController::class, 'delete'])->name('librarian.patronType.delete');
+});
+
+Route::prefix('librarian/announcement')->middleware(['auth', 'role:librarian'])->controller(AnnouncementController::class)->group(function () {
+    Route::get('index', [AnnouncementController::class, 'index'])->name('librarian.announcement.index');
+    Route::post('store', [AnnouncementController::class, 'store'])->name('librarian.announcement.store');
+    Route::get('edit/{announcement_id}', [AnnouncementController::class, 'edit'])->name('librarian.announcement.edit');
+    Route::post('update', [AnnouncementController::class, 'update'])->name('librarian.announcement.update');
+    Route::delete('delete/{announcement_id}', [AnnouncementController::class, 'delete'])->name('librarian.announcement.delete');
+    Route::get('filter', [AnnouncementController::class, 'filter'])->name('librarian.announcement.filter');
 });
