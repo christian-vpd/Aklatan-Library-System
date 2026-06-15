@@ -105,27 +105,30 @@
                         <span class="nav-link-title"> Borrows </span>
                       </a>
                     </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="{{ route('librarian.dashboard') }}">
-                        <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler.io/icons/icon/home -->
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-api-book">
-                              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                              <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 1.006 -.5" />
-                              <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
-                              <path d="M3 6v13" />
-                              <path d="M12 6v13" />
-                              <path d="M21 6v6" />
-                              <path d="M17.001 19a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-                              <path d="M19.001 15.5v1.5" />
-                              <path d="M19.001 21v1.5" />
-                              <path d="M22.032 17.25l-1.299 .75" />
-                              <path d="M17.27 20l-1.3 .75" />
-                              <path d="M15.97 17.25l1.3 .75" />
-                              <path d="M20.733 20l1.3 .75" />
-                            </svg>
-                        </span>
-                        <span class="nav-link-title"> Manage Books </span>
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#navbar-form" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
+                        <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler.io/icons/icon/checkbox -->
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-api-book">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 1.006 -.5" />
+                            <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+                            <path d="M3 6v13" />
+                            <path d="M12 6v13" />
+                            <path d="M21 6v6" />
+                            <path d="M17.001 19a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                            <path d="M19.001 15.5v1.5" />
+                            <path d="M19.001 21v1.5" />
+                            <path d="M22.032 17.25l-1.299 .75" />
+                            <path d="M17.27 20l-1.3 .75" />
+                            <path d="M15.97 17.25l1.3 .75" />
+                            <path d="M20.733 20l1.3 .75" />
+                          </svg></span>
+                        <span class="nav-link-title"> Books </span>
                       </a>
+                      <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{{ route('librarian.category.index') }}"> Categories </a>
+                        <a class="dropdown-item" href="{{ route('librarian.dashboard') }}"> Manage Books </a>
+                      </div>
                     </li>
                     <li class="nav-item {{ request()->routeIs('librarian.author.*') ? 'active' : '' }}">
                       <a class="nav-link" href="{{ route('librarian.author.index') }}">

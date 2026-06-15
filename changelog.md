@@ -1,5 +1,8 @@
 # Changelogs
 
+**v0.12.0 - June 15, 2026**
+- Add Book Category Page
+
 **v0.11.0 - June 15, 2026**
 - Add Change Password Feature (Librarian)
 - Add Change Information Feature (Librarian)
