@@ -6,6 +6,13 @@ use App\Http\Controllers\librarian\PatronTypesController;
 use App\Http\Controllers\librarian\AuthorController;
 use App\Http\Controllers\librarian\PatronController;
 use App\Http\Controllers\librarian\AnnouncementController;
+use App\Http\Controllers\librarian\AccountSettingController;
+
+Route::prefix('librarian/account_settings')->middleware(['auth', 'role:librarian'])->controller(AccountSettingController::class)->group(function() {
+    Route::get('index', [AccountSettingController::class, 'index'])->name('librarian.account_settings.index');
+    Route::post('update', [AccountSettingController::class, 'update'])->name('librarian.account_settings.update');
+    Route::post('changePassword', [AccountSettingController::class, 'changePassword'])->name('librarian.account_settings.changePassword');
+});
 
 Route::prefix('/librarian')->middleware(['auth', 'role:librarian'])->controller(LibrarianController::class)->group(function() {
     Route::get('dashboard', [LibrarianController::class, 'dashboard'])->name('librarian.dashboard');

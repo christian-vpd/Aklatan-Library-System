@@ -19,125 +19,125 @@
             </button>
         </div>
     </div>
-</div>
-<div class="card">
-    <div class="card-header">
-        <h3 class="card-title">Filter</h3>
-    </div>
-    <div class="card-body border-bottom py-3">
-        <div class="alert alert-info" role="alert">
-            <div class="alert-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon alert-icon icon-2">
-                    <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
-                    <path d="M12 9h.01"></path>
-                    <path d="M11 12h1v4h1"></path>
-                </svg>
-            </div>
-            You may use filters for quick navigation
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Filter</h3>
         </div>
-        <form action="{{ route('librarian.announcement.filter') }}" method="GET" id="announceFilterForm">
-            <div class="row">
-                <div class="col-12 col-sm-6 col-md-3 mb-2">
-                    <p class="form-label">Status</p>
-                    <select class="form-select" name="filter_active">
-                        <option value="" disabled>Select Status</option>
-                        <option value="1" {{ request('filter_active') == 1 ? 'selected' : '' }}>Active</option>
-                        <option value="0" {{ request('filter_active') == 0 ? 'selected' : '' }}>Inactive</option>
-                    </select>
+        <div class="card-body border-bottom py-3">
+            <div class="alert alert-info" role="alert">
+                <div class="alert-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon alert-icon icon-2">
+                        <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
+                        <path d="M12 9h.01"></path>
+                        <path d="M11 12h1v4h1"></path>
+                    </svg>
                 </div>
-                <div class="col-12 col-sm-6 col-md-3 mb-2">
-                    <p class="form-label">Announcement Type</p>
-                    <select class="form-select" name="filter_announcement_type">
-                        <option value="" disabled>Select Announcement Type</option>
-                        <option value="announcement" {{ request('filter_announcement_type') == 'announcement' ? 'selected' : '' }}>Announcement</option>
-                        <option value="reminder" {{ request('filter_announcement_type') == 'reminder' ? 'selected' : '' }}>Reminder</option>
-                        <option value="urgent" {{ request('filter_announcement_type') == 'urgent' ? 'selected' : '' }}>Urgent</option>
-                    </select>
-                </div>
-                <div class="col-12 col-sm-6 col-md-3 mb-2 d-flex align-items-end">
-                    <button type="submit" class="btn btn-info btn-5" onclick="$(this).prop('disabled', true); $('#announceFilterForm').submit();">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-filter">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path d="M4 4h16v2.172a2 2 0 0 1 -.586 1.414l-4.414 4.414v7l-6 2v-8.5l-4.48 -4.928a2 2 0 0 1 -.52 -1.345v-2.227" />
-                        </svg>
-                        Filter
-                    </button>
-                </div>
+                You may use filters for quick navigation
             </div>
-        </form>
+            <form action="{{ route('librarian.announcement.filter') }}" method="GET" id="announceFilterForm">
+                <div class="row">
+                    <div class="col-12 col-sm-6 col-md-3 mb-2">
+                        <p class="form-label">Status</p>
+                        <select class="form-select" name="filter_active">
+                            <option value="" disabled>Select Status</option>
+                            <option value="1" {{ request('filter_active') == 1 ? 'selected' : '' }}>Active</option>
+                            <option value="0" {{ request('filter_active') == 0 ? 'selected' : '' }}>Inactive</option>
+                        </select>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-3 mb-2">
+                        <p class="form-label">Announcement Type</p>
+                        <select class="form-select" name="filter_announcement_type">
+                            <option value="" disabled>Select Announcement Type</option>
+                            <option value="announcement" {{ request('filter_announcement_type') == 'announcement' ? 'selected' : '' }}>Announcement</option>
+                            <option value="reminder" {{ request('filter_announcement_type') == 'reminder' ? 'selected' : '' }}>Reminder</option>
+                            <option value="urgent" {{ request('filter_announcement_type') == 'urgent' ? 'selected' : '' }}>Urgent</option>
+                        </select>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-3 mb-2 d-flex align-items-end">
+                        <button type="submit" class="btn btn-info btn-5" onclick="$(this).prop('disabled', true); $('#announceFilterForm').submit();">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-filter">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M4 4h16v2.172a2 2 0 0 1 -.586 1.414l-4.414 4.414v7l-6 2v-8.5l-4.48 -4.928a2 2 0 0 1 -.52 -1.345v-2.227" />
+                            </svg>
+                            Filter
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
-<div class="card mt-3">
-    <div class="card-body border-bottom py-3">
-        <table class="table datatable table-selectable table-vcenter text-nowrap table-responsive" id="announcementTable">
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Created By</th>
-                    <th>Type</th>
-                    <th>Status</th>
-                    <th>Date Posted</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @if ($announcement)
-                    @foreach ($announcement as $item)
-                        <tr>
-                            <td class="text-truncate" style="max-width: 100px;">
-                                {{ $item->title }}
-                            </td>
-                            <td>{{ $item->librarian->first_name}} {{ $item->librarian->last_name}}</td>
-                            <td>
-                                @switch($item->type)
-                                    @case('announcement')
-                                        <span class="badge bg-success text-success-fg">Announcement</span>
-                                        @break
-                                    @case('reminder')
-                                        <span class="badge bg-info text-info-fg">Reminder</span>
-                                        @break
-                                    @case('urgent')
-                                        <span class="badge bg-danger text-danger-fg">Urgent</span>
-                                        @break
-                                    @default
-                                        <span class="badge bg-secondary text-secondary-fg">Unknown</span>
-                                @endswitch
-                            </td>
-                            <td>
-                                @php
-                                    $status = Str::ucfirst($item->is_active);
-                                @endphp
-                                <span class="badge {{$status == 1 ? 'bg-success text-success-fg' : 'bg-danger text-danger-fg' }}">
-                                    {{$status == 1 ? 'Active' : 'Inactive' }}
-                                </span>
-                            </td>
-                            <td>{{ $item->created_at->format('F j, Y') }}</td>
-                            <td>
-                                <div class="btn-actions d-flex justify-content-center align-items-center">
-                                    <button class="btn btn-action" data-toggle="tooltip" data-placement="top" title="Edit" onclick="editAnnouncement({{$item->id}})">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-1">
-                                        <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1"></path>
-                                        <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"></path>
-                                        <path d="M16 5l3 3"></path>
-                                        </svg>
-                                    </button>
-                                    <button class="btn btn-action" data-toggle="tooltip" data-placement="top" title="Delete" onclick="deleteAnnouncement({{$item->id}})">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-trash">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                            <path d="M4 7l16 0" />
-                                            <path d="M10 11l0 6" />
-                                            <path d="M14 11l0 6" />
-                                            <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
-                                            <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
-                                        </svg>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                    @endforeach
-                @endif
-            </tbody>
-        </table>
+    <div class="card mt-3">
+        <div class="card-body border-bottom py-3">
+            <table class="table datatable table-selectable table-vcenter text-nowrap table-responsive" id="announcementTable">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Created By</th>
+                        <th>Type</th>
+                        <th>Status</th>
+                        <th>Date Posted</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if ($announcement)
+                        @foreach ($announcement as $item)
+                            <tr>
+                                <td class="text-truncate" style="max-width: 100px;">
+                                    {{ $item->title }}
+                                </td>
+                                <td>{{ $item->librarian->first_name}} {{ $item->librarian->last_name}}</td>
+                                <td>
+                                    @switch($item->type)
+                                        @case('announcement')
+                                            <span class="badge bg-success text-success-fg">Announcement</span>
+                                            @break
+                                        @case('reminder')
+                                            <span class="badge bg-info text-info-fg">Reminder</span>
+                                            @break
+                                        @case('urgent')
+                                            <span class="badge bg-danger text-danger-fg">Urgent</span>
+                                            @break
+                                        @default
+                                            <span class="badge bg-secondary text-secondary-fg">Unknown</span>
+                                    @endswitch
+                                </td>
+                                <td>
+                                    @php
+                                        $status = Str::ucfirst($item->is_active);
+                                    @endphp
+                                    <span class="badge {{$status == 1 ? 'bg-success text-success-fg' : 'bg-danger text-danger-fg' }}">
+                                        {{$status == 1 ? 'Active' : 'Inactive' }}
+                                    </span>
+                                </td>
+                                <td>{{ $item->created_at->format('F j, Y') }}</td>
+                                <td>
+                                    <div class="btn-actions d-flex justify-content-center align-items-center">
+                                        <button class="btn btn-action" data-toggle="tooltip" data-placement="top" title="Edit" onclick="editAnnouncement({{$item->id}})">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-1">
+                                            <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1"></path>
+                                            <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"></path>
+                                            <path d="M16 5l3 3"></path>
+                                            </svg>
+                                        </button>
+                                        <button class="btn btn-action" data-toggle="tooltip" data-placement="top" title="Delete" onclick="deleteAnnouncement({{$item->id}})">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-trash">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                <path d="M4 7l16 0" />
+                                                <path d="M10 11l0 6" />
+                                                <path d="M14 11l0 6" />
+                                                <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                                                <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    @endif
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 <script src="{{ asset('assets/libs/jquery/jquery.validate.min.js') }}"></script>

@@ -1,5 +1,11 @@
 # Changelogs
 
+**v0.11.0 - June 15, 2026**
+- Add Change Password Feature (Librarian)
+- Add Change Information Feature (Librarian)
+- Login Page Adjustments
+- Feature Boxing Fix more consistent layout
+
 **v0.10.0 - June 9, 2026**
 - Add Librarian Announcement Page
 

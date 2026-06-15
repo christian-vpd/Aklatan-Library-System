@@ -7,6 +7,7 @@
     <title>Aklatan | Log In</title>
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ asset('assets/css/tabler/tabler.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/libs/toastr/toastr.css') }}">
     <style>
         @font-face {
             font-family: interVariable;
@@ -74,6 +75,7 @@
 <script src="{{ asset('assets/js/tabler/tabler.min.js') }}"></script>
 <script src="{{ asset('assets/libs/jquery/jquery.min.js') }}"></script>
 <script src="{{ asset('assets/libs/jquery/jquery.validate.min.js') }}"></script>
+<script src="{{ asset('assets/libs/toastr/toastr.min.js') }}"></script>
 <script>
     $(document).ready(function () {
         $('#loginForm').validate({
@@ -135,4 +137,12 @@
         }
     }
 </script>
+@if (session('notification'))
+    <script>
+        toastr["{{ session('notification')['alert_type'] }}"](
+            "{{ session('notification')['message'] }}",
+            "{{ session('notification')['title'] }}"
+        );
+    </script>
+@endif
 </html>

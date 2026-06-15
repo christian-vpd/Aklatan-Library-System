@@ -57,6 +57,8 @@
                 </div>
               </a>
               <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                <a href="{{ route('librarian.account_settings.index') }}" class="dropdown-item">Account Settings</a>
+                <div class="dropdown-divider"></div>
                 <form id="logoutForm" action="{{ route('logout') }}" method="POST">
                     @csrf
                     <a href="#" class="dropdown-item"
