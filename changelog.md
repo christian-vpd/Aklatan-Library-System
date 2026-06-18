@@ -1,5 +1,10 @@
 # Changelogs
 
+**v0.13.0 - June 18, 2026**
+- Add Manage Book Page
+- Add Boostrap Datepicker Library
+- Add Tom Select Library
+
 **v0.12.0 - June 15, 2026**
 - Add Book Category Page
 

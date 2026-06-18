@@ -28,7 +28,12 @@ Route::prefix('/categories')->middleware(['auth', 'role:librarian'])->controller
 });
 
 Route::prefix('/manage-books')->middleware(['auth', 'role:librarian'])->controller(ManageBooksController::class)->group(function() {
-    
+    Route::get('index', [ManageBooksController::class, 'index'])->name('librarian.manageBooks.index');
+    Route::post('store', [ManageBooksController::class, 'store'])->name('librarian.manageBooks.store');
+    Route::get('edit/{book_id}', [ManageBooksController::class, 'edit'])->name('librarian.manageBooks.edit');
+    Route::post('update', [ManageBooksController::class, 'update'])->name('librarian.manageBooks.update');
+    Route::delete('delete/{book_id}', [ManageBooksController::class, 'delete'])->name('librarian.manageBooks.delete');
+    Route::get('filter', [ManageBooksController::class, 'filter'])->name('librarian.manageBooks.filter');
 });
 
 Route::prefix('librarian/author')->middleware(['auth', 'role:librarian'])->controller(AuthorController::class)->group(function() {
