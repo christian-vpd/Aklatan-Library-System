@@ -161,7 +161,6 @@ class ManageBooksController extends Controller
         catch (\Exception $e)
         {
             DB::rollBack();
-            Log::info($e);
             return response()->json([
                 'message' => 'Internal Server Error.',
                 'error' => $e->getMessage(),

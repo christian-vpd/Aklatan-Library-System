@@ -1,5 +1,9 @@
 # Changelogs
 
+**v0.14.0 - June 26, 2026**
+- Add Manage Book Copy Page
+- Removed Logs for Debug in Controllers
+
 **v0.13.0 - June 18, 2026**
 - Add Manage Book Page
 - Add Boostrap Datepicker Library

@@ -9,6 +9,7 @@ use App\Http\Controllers\librarian\AnnouncementController;
 use App\Http\Controllers\librarian\AccountSettingController;
 use App\Http\Controllers\librarian\book\CategoriesController;
 use App\Http\Controllers\librarian\book\ManageBooksController;
+use App\Http\Controllers\librarian\book\BookCopiesController;
 
 Route::prefix('librarian/account_settings')->middleware(['auth', 'role:librarian'])->controller(AccountSettingController::class)->group(function() {
     Route::get('index', [AccountSettingController::class, 'index'])->name('librarian.account_settings.index');
@@ -20,20 +21,28 @@ Route::prefix('/librarian')->middleware(['auth', 'role:librarian'])->controller(
     Route::get('dashboard', [LibrarianController::class, 'dashboard'])->name('librarian.dashboard');
 });
 
-Route::prefix('/categories')->middleware(['auth', 'role:librarian'])->controller(CategoriesController::class)->group(function() {
+Route::prefix('librarian/categories')->middleware(['auth', 'role:librarian'])->controller(CategoriesController::class)->group(function() {
     Route::get('index', [CategoriesController::class, 'index'])->name('librarian.category.index');
     Route::post('store', [CategoriesController::class, 'store'])->name('librarian.category.store');
     Route::post('update', [CategoriesController::class, 'update'])->name('librarian.category.update');
     Route::delete('delete/{category_id}', [CategoriesController::class, 'delete'])->name('librarian.category.delete');
 });
 
-Route::prefix('/manage-books')->middleware(['auth', 'role:librarian'])->controller(ManageBooksController::class)->group(function() {
+Route::prefix('librarian/manage-books')->middleware(['auth', 'role:librarian'])->controller(ManageBooksController::class)->group(function() {
     Route::get('index', [ManageBooksController::class, 'index'])->name('librarian.manageBooks.index');
     Route::post('store', [ManageBooksController::class, 'store'])->name('librarian.manageBooks.store');
     Route::get('edit/{book_id}', [ManageBooksController::class, 'edit'])->name('librarian.manageBooks.edit');
     Route::post('update', [ManageBooksController::class, 'update'])->name('librarian.manageBooks.update');
     Route::delete('delete/{book_id}', [ManageBooksController::class, 'delete'])->name('librarian.manageBooks.delete');
     Route::get('filter', [ManageBooksController::class, 'filter'])->name('librarian.manageBooks.filter');
+});
+
+Route::prefix('librarian/book-copies')->middleware(['auth', 'role:librarian'])->controller(BookCopiesController::class)->group(function() {
+    Route::get('index/{book_id}', [BookCopiesController::class, 'index'])->name('librarian.bookCopies.index');
+    Route::post('store', [BookCopiesController::class, 'store'])->name('librarian.bookCopies.store');
+    Route::post('update', [BookCopiesController::class, 'update'])->name('librarian.bookCopies.update');
+    Route::delete('delete/{book_copy_id}', [BookCopiesController::class, 'delete'])->name('librarian.bookCopies.delete');
+    Route::post('checkBarcode', [BookCopiesController::class, 'checkBarcode'])->name('librarian.bookCopies.checkBarcode');
 });
 
 Route::prefix('librarian/author')->middleware(['auth', 'role:librarian'])->controller(AuthorController::class)->group(function() {
