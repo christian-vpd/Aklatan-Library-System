@@ -1,5 +1,9 @@
 # Changelogs
 
+**v0.15.0 - June 29, 2026**
+- Add Change Password Feature (Patron)
+- Add Change Information Feature (Patron)
+
 **v0.14.0 - June 26, 2026**
 - Add Manage Book Copy Page
 - Removed Logs for Debug in Controllers
