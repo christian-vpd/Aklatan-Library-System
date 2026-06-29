@@ -139,6 +139,10 @@ $(document).ready(function () {
         responsive: true,
     });
 
+    $('.no-numbers').on('input', function () {
+        this.value = this.value.replace(/\d/g, '');
+    });
+
 });
 
 $('#addLibrarianForm').validate({

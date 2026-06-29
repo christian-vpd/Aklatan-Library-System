@@ -42,15 +42,15 @@
                         <div class="row mb-3">
                             <div class="col-12 col-md-3 col-sm-6 mb-2">
                                 <label class="form-label required">Last Name</label>
-                                <input type="text" class="form-control" name="lastName" placeholder="Last Name" maxlength="20" value="{{ $user->librarian->last_name }}">
+                                <input type="text" class="form-control no-numbers" name="lastName" placeholder="Last Name" maxlength="20" value="{{ $user->librarian->last_name }}">
                             </div>
                             <div class="col-12 col-md-3 col-sm-6 mb-2">
                                 <label class="form-label required">First Name</label>
-                                <input type="text" class="form-control" name="firstName" placeholder="First Name" maxlength="20" value="{{ $user->librarian->first_name }}">
+                                <input type="text" class="form-control no-numbers" name="firstName" placeholder="First Name" maxlength="20" value="{{ $user->librarian->first_name }}">
                             </div>
                             <div class="col-12 col-md-3 col-sm-6 mb-2">
                                 <label class="form-label">Middle Name</label>
-                                <input type="text" class="form-control" name="middleName" placeholder="Middle Name" maxlength="20" value="{{ $user->librarian->middle_name }}">
+                                <input type="text" class="form-control no-numbers" name="middleName" placeholder="Middle Name" maxlength="20" value="{{ $user->librarian->middle_name }}">
                             </div>
                             <div class="col-12 col-md-3 col-sm-6 mb-2"> 
                                 <label class="form-label">Suffix</label> 
@@ -169,6 +169,10 @@ $(document).ready(function () {
     // Numbers Only
     $('input[name="contactNumber"]').on('input', function () {
         this.value = this.value.replace(/[^0-9]/g, '');
+    });
+
+    $('.no-numbers').on('input', function () {
+        this.value = this.value.replace(/\d/g, '');
     });
 });
 

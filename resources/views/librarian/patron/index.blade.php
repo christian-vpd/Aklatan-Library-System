@@ -215,6 +215,10 @@ $(document).ready(function() {
     $('input[name="edit_contactNumber"]').on('input', function () {
         this.value = this.value.replace(/[^0-9]/g, '');
     });
+
+    $('.no-numbers').on('input', function () {
+        this.value = this.value.replace(/\d/g, '');
+    });
 });
 </script>
 <script>

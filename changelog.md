@@ -1,5 +1,8 @@
 # Changelogs
 
+**v0.15.1 - June 29, 2026**
+- Add No Number validation on names
+
 **v0.15.0 - June 29, 2026**
 - Add Change Password Feature (Patron)
 - Add Change Information Feature (Patron)

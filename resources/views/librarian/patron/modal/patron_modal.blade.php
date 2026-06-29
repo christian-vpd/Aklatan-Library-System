@@ -36,17 +36,17 @@
                     <div class="row d-flex align-items-center mt-3">
                         <div class="col-6">
                             <label class="form-label required">Last Name</label>
-                            <input type="text" class="form-control" name="lastName" placeholder="Last Name" maxlength="20">
+                            <input type="text" class="form-control no-numbers" name="lastName" placeholder="Last Name" maxlength="20">
                         </div>
                         <div class="col-6">
                             <label class="form-label required">First Name</label>
-                            <input type="text" class="form-control" name="firstName" placeholder="First Name" maxlength="20">
+                            <input type="text" class="form-control no-numbers" name="firstName" placeholder="First Name" maxlength="20">
                         </div>
                     </div>
                     <div class="row d-flex align-items-center mt-3">
                         <div class="col-6">
                             <label class="form-label">Middle Name</label>
-                            <input type="text" class="form-control" name="middleName" placeholder="Middle Name" maxlength="20">
+                            <input type="text" class="form-control no-numbers" name="middleName" placeholder="Middle Name" maxlength="20">
                         </div>
                         <div class="col-6">
                             <label class="form-label">Suffix</label>
@@ -140,17 +140,17 @@
                     <div class="row d-flex align-items-center mt-3">
                         <div class="col-6">
                             <label class="form-label required">Last Name</label>
-                            <input type="text" class="form-control" id="edit_lastName" name="edit_lastName" placeholder="Last Name" maxlength="20">
+                            <input type="text" class="form-control no-numbers" id="edit_lastName" name="edit_lastName" placeholder="Last Name" maxlength="20">
                         </div>
                         <div class="col-6">
                             <label class="form-label required">First Name</label>
-                            <input type="text" class="form-control" id="edit_firstName" name="edit_firstName" placeholder="First Name" maxlength="20">
+                            <input type="text" class="form-control no-numbers" id="edit_firstName" name="edit_firstName" placeholder="First Name" maxlength="20">
                         </div>
                     </div>
                     <div class="row d-flex align-items-center mt-3">
                         <div class="col-6">
                             <label class="form-label">Middle Name</label>
-                            <input type="text" class="form-control" id="edit_middleName" name="edit_middleName" placeholder="Middle Name" maxlength="20">
+                            <input type="text" class="form-control no-numbers" id="edit_middleName" name="edit_middleName" placeholder="Middle Name" maxlength="20">
                         </div>
                         <div class="col-6">
                             <label class="form-label">Suffix</label>
